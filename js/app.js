@@ -100,10 +100,10 @@ $.ajax({
      var $modalBoxContainer = $('<div class="modal-container"> </div>');
      var $modal = $('<div class="modal"> </div>');
      var $modalInfoContainer = $('<div class="modal-info-container"> </div>');
-     var $modalBtnContainer = $('<div class="modal-btn-container"> </div>');
+     //var $modalBtnContainer = $('<div class="modal-btn-container"> </div>'); I'll get to this later
 
      //Append $modal, $modalInfoContainer and $modalBtnContainer inside $modalBoxContainer
-      $modalBoxContainer.append($modal, $modalInfoContainer, $modalBtnContainer);
+      $modalBoxContainer.append($modal, $modalInfoContainer,);
       
       //Append an button input inside $modal
       $modal.append('<button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong> </button');
@@ -124,9 +124,15 @@ $.ajax({
       '<p class="modal-text">(555) 555-5555</p>',
        '<p class="modal-text">123 Portland Ave., Portland, OR 97204</p>', 
       '<p class="modal-text">Birthday: 10/21/2015</p>');
+        console.log($modalInfoContainer)
+      //Append the navigational buttons after $modal //<---Need to get back to this later
+      //$modal.insertAfter($modalBtnContainer);
       
       //Finally, I will append $modalBoxContainer inside body tag
-       $('body').append($modalBoxContainer); 
+       $('body').append($modalBoxContainer);
+       
+       //I need to make it so that the modal will close itself when clicking on the X
+       
 
     }
     
