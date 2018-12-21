@@ -36,7 +36,7 @@ $.ajax({
 //==========================================================================================================================================
 
       /*Next I will create the gallery markup by using the commented html markup as reference and
-       append it to `search-container` div.
+       append them to the `gallery` div.
 
       <div class="card">
                     <div class="card-img-container">
@@ -67,7 +67,8 @@ $.ajax({
       '<p class="card-text">email</p>', '<p class="card-text cap">city, state</p>');
       
     //Append $galleryMarkUp inside <div id="gallery" class="gallery">
-     $('#gallery').append($galleryMarkUp);
+     $('.gallery').append($galleryMarkUp);
+    
 //==========================================================================================================================================
 
      /*Now I will dynamically create the modal box markup using the html below as guidance
@@ -100,7 +101,7 @@ $.ajax({
      var $modalBoxContainer = $('<div class="modal-container"> </div>');
      var $modal = $('<div class="modal"> </div>');
      var $modalInfoContainer = $('<div class="modal-info-container"> </div>');
-     //var $modalBtnContainer = $('<div class="modal-btn-container"> </div>'); I'll get to this later
+     var $modalBtnContainer = $('<div class="modal-btn-container"> </div>'); //modal buttons
 
      //Append $modal, $modalInfoContainer and $modalBtnContainer inside $modalBoxContainer
       $modalBoxContainer.append($modal, $modalInfoContainer,);
@@ -109,31 +110,32 @@ $.ajax({
       $modal.append('<button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong> </button');
 
 
-      /*Inside $modalInfoContainer, I will append a 
+      /*Inside $modal I will append a 
       [img scr], 
       [h3], 
       [2 paragraphs], 
       followed by an [hr], 
       and 3 more paragraphs*/   
 
-      $modalInfoContainer.append('<img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">', 
+      $modal.prepend('<img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">', 
       '<h3 id="name" class="modal-name cap">name</h3>', 
       '<p class="modal-text">email</p>',
        '<p class="modal-text cap">city</p>',
       '<hr>', 
       '<p class="modal-text">(555) 555-5555</p>',
        '<p class="modal-text">123 Portland Ave., Portland, OR 97204</p>', 
-      '<p class="modal-text">Birthday: 10/21/2015</p>');
-        console.log($modalInfoContainer)
-      //Append the navigational buttons after $modal //<---Need to get back to this later
-      //$modal.insertAfter($modalBtnContainer);
+      '<p class="modal-text">Birthday: 10/21/2015</p>', $modalBtnContainer);
+        console.log($modal)
+      
       
       //Finally, I will append $modalBoxContainer inside body tag
        $('body').append($modalBoxContainer);
        
        //I need to make it so that the modal will close itself when clicking on the X
+       $('#modal-close-btn').click(function ()  {
        
-
+         console.log('you clicked on the x button');
+       });
     }
     
   });
