@@ -60,14 +60,14 @@ $.ajax({
       $galleryMarkUp.append($cardIMGContainer, $cardInfoContainer);
 
       //I append an img src inside $cardIMGContainer
-      $cardIMGContainer.append('<img class="card-img" src="https://placehold.it/90x90" alt="profile picture">');
+      $cardIMGContainer.prepend('<img class="card-img" src="https://placehold.it/90x90" alt="profile picture">');
       
       //I also need to append an h3 and a couple of paragraphs inside $cardInfoContainer
-      $cardInfoContainer.append('<h3 id="name" class="card-name cap">first last</h3>',
+      $cardInfoContainer.prepend('<h3 id="name" class="card-name cap">first last</h3>',
       '<p class="card-text">email</p>', '<p class="card-text cap">city, state</p>');
       
     //Append $galleryMarkUp inside <div id="gallery" class="gallery">
-     $('.gallery').append($galleryMarkUp);
+     $('#gallery').append($galleryMarkUp);
     
 //==========================================================================================================================================
 
@@ -106,7 +106,7 @@ $.ajax({
      //Append $modal, $modalInfoContainer and $modalBtnContainer inside $modalBoxContainer
       $modalBoxContainer.append($modal, $modalInfoContainer,);
       
-      //Append an button input inside $modal
+      //Append $modalBtnContainer (X)button, inside $modal
       $modal.append('<button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong> </button');
 
 
@@ -115,7 +115,8 @@ $.ajax({
       [h3], 
       [2 paragraphs], 
       followed by an [hr], 
-      and 3 more paragraphs*/   
+      and 3 more paragraphs 
+      and lastly $modalBtnContainer */   
 
       $modal.prepend('<img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">', 
       '<h3 id="name" class="modal-name cap">name</h3>', 
@@ -131,12 +132,32 @@ $.ajax({
       //Finally, I will append $modalBoxContainer inside body tag
        $('body').append($modalBoxContainer);
        
-       //I need to make it so that the modal will close itself when clicking on the X
-       $('#modal-close-btn').click(function ()  {
        
-         console.log('you clicked on the x button');
+    /*appends an "active" class to .modal(pop-up-window) and .modal-container(overlay) when .card is clicked
+       
+       I used a code snippet from https://www.pair.com/support/kb/how-to-use-jquery-to-generate-modal-pop-up-when-clicked/
+       */
+       $('.card').on("click", function() {
+           $(".modal, .modal-container").addClass("active");
+           console.log('the modal should pop up after clicking the div card')
        });
-    }
+
+       /*This removes the "active" class to .modal(pop-up-window)  and .modal-container 
+       when clicking on: the "X" button, the opened modal or clicking outside the modal,
+       so the user has 3 ways to close a modal, this improves UX
+       */
+       $('#modal-close-btn, .modal, .modal-container').on("click", function()  {
+       $(".modal, .modal-container").removeClass("active");
+         console.log('you clicked on the x button');
+
+        
+
+       }); 
+
+       //If the user clicks anywhere outside the modal, then the modal will close
+
+
+    } //closes success function
     
-  });
+  }); //closes ajax request
 
