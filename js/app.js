@@ -1,28 +1,6 @@
-/* 
-  With information provided from The Random User Generator API https://randomuser.me/, 
-  I  send a request to the API, and use the response data to display 12 users, 
-  along with some basic information for each:
-
-Image
-First and Last Name
-Email
-City or location
-  */
-
-$.ajax({
-    url: 'https://randomuser.me/api/?results=12',//'https://randomuser.me/api/?nat=us'
-    dataType: 'json',
-    success: function(data) {
-      console.log(data.results); //this should log the data for 12 employees inJSON format
 //===================================================================================================================
       /*Below, I created a search bar dynamically, I
-      used the HTML markup as a reference, I append it to `search-container` div.
-      
-      <form action="#" method="get">
-                            <input type="search" id="search-input" class="search-input" placeholder="Search...">
-                            <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
-                        </form>
-      */
+      used the HTML markup as a reference, I append it to `search-container` div.*/
       
       //create variable for the form element 
       var $searchBox = $('<form action="#" method="get"> </form>');
@@ -36,20 +14,7 @@ $.ajax({
 //==========================================================================================================================================
 
       /*Next I will create the gallery markup by using the commented html markup as reference and
-       append them to the `gallery` div.
-
-      <div class="card">
-                    <div class="card-img-container">
-                        <img class="card-img" src="https://placehold.it/90x90" alt="profile picture">
-                    </div>
-                    <div class="card-info-container">
-                        <h3 id="name" class="card-name cap">first last</h3>
-                        <p class="card-text">email</p>
-                        <p class="card-text cap">city, state</p>
-                    </div>
-                </div>
-      
-      */
+       append them to the `gallery` div. */
 
       //create variables for DIV Elements
       var $galleryMarkUp = $('<div class="card"> </div>');
@@ -80,31 +45,7 @@ $.ajax({
     }
 //==========================================================================================================================================
 
-     /*Now I will dynamically create the modal box markup using the html below as guidance
-
-     <div1 class="modal-container">
-                <div2 class="modal">
-                    <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-                    <div3 class="modal-info-container">
-                        <img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">
-                        <h3 id="name" class="modal-name cap">name</h3>
-                        <p class="modal-text">email</p>
-                        <p class="modal-text cap">city</p>
-                        <hr>
-                        <p class="modal-text">(555) 555-5555</p>
-                        <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
-                        <p class="modal-text">Birthday: 10/21/2015</p>
-                    </div3>
-                </div2>
-
-                // IMPORTANT: Below is only for exceeds tasks 
-                <div4 class="modal-btn-container">
-                    <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
-                    <button type="button" id="modal-next" class="modal-next btn">Next</button>
-                </div4>
-    </div1>
-
-     */ 
+     /*Now I will dynamically create the modal box markup using the html below as guidance*/ 
     
      //Create variables for the div elements
      var $modalBoxContainer = $('<div class="modal-container"> </div>');
@@ -115,7 +56,7 @@ $.ajax({
      //Append $modal, $modalInfoContainer and $modalBtnContainer inside $modalBoxContainer
       $modalBoxContainer.append($modal, $modalInfoContainer,);
       
-      //Append $modalBtnContainer (X)button, inside $modal
+      //Append $modalBtnContainer, inside $modal
       $modal.append('<button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong> </button');
 
 
@@ -140,7 +81,7 @@ $.ajax({
       
       //Finally, I will append $modalBoxContainer inside body tag
        $('body').append($modalBoxContainer);
-     //==========================================================================================================================================
+//==========================================================================================================================================
   
        
     /*appends an "active" class to .modal(pop-up-window) and .modal-container(overlay) when .card is clicked
@@ -160,8 +101,26 @@ $.ajax({
        $(".modal, .modal-container").removeClass("active");
          console.log('you clicked on the x button');
     }); 
-
+//==========================================================================================================================================
       
+
+
+/* 
+  With information provided from The Random User Generator API https://randomuser.me/, 
+  I  send a request to the API, and use the response data to display 12 users, 
+  along with some basic information for each:
+
+Image
+First and Last Name
+Email
+City or location
+  */
+
+ $.ajax({
+    url: 'https://randomuser.me/api/?results=12',//'https://randomuser.me/api/?nat=us'
+    dataType: 'json',
+    success: function(data) {
+      console.log(data.results); //this should log the data for 12 employees inJSON format
 
 
     } //closes success function
