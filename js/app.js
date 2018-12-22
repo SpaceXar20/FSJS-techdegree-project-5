@@ -10,7 +10,7 @@ City or location
   */
 
 $.ajax({
-    url: 'https://randomuser.me/api/?results=12',
+    url: 'https://randomuser.me/api/?results=12',//'https://randomuser.me/api/?nat=us'
     dataType: 'json',
     success: function(data) {
       console.log(data.results); //this should log the data for 12 employees inJSON format
@@ -68,7 +68,16 @@ $.ajax({
       
     //Append $galleryMarkUp inside <div id="gallery" class="gallery">
      $('#gallery').append($galleryMarkUp);
-    
+
+
+     /*I need to create 12 gallery cards in order to hold 12 employees 
+     I used a code snippet from https://stackoverflow.com/a/10426334/10043628 user Guffa
+     */
+     
+    for (let index = 1; index <12; index++) {
+       $galleryMarkUp.clone().insertAfter($galleryMarkUp)
+        
+    }
 //==========================================================================================================================================
 
      /*Now I will dynamically create the modal box markup using the html below as guidance
@@ -131,7 +140,8 @@ $.ajax({
       
       //Finally, I will append $modalBoxContainer inside body tag
        $('body').append($modalBoxContainer);
-       
+     //==========================================================================================================================================
+  
        
     /*appends an "active" class to .modal(pop-up-window) and .modal-container(overlay) when .card is clicked
        
@@ -149,12 +159,9 @@ $.ajax({
        $('#modal-close-btn, .modal, .modal-container').on("click", function()  {
        $(".modal, .modal-container").removeClass("active");
          console.log('you clicked on the x button');
+    }); 
 
-        
-
-       }); 
-
-       //If the user clicks anywhere outside the modal, then the modal will close
+      
 
 
     } //closes success function
