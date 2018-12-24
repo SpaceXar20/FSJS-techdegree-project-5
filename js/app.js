@@ -33,13 +33,14 @@
       
     //Append $galleryMarkUp inside <div id="gallery" class="gallery">
      $('#gallery').append($galleryMarkUp);
-
-
-     /*I need to create 12 gallery cards in order to hold 12 employees 
+     
+    
+     
+/*I need to create 12 gallery cards in order to hold 12 employees 
      I used a code snippet from https://stackoverflow.com/a/10426334/10043628 user Guffa
      */
      
-    for (let index = 1; index <12; index++) {
+    for (let index = 0; index <11; index++) {
        $galleryMarkUp.clone().insertAfter($galleryMarkUp)
         
     }
@@ -76,7 +77,7 @@
       '<p class="modal-text">(555) 555-5555</p>',
        '<p class="modal-text">123 Portland Ave., Portland, OR 97204</p>', 
       '<p class="modal-text">Birthday: 10/21/2015</p>', $modalBtnContainer);
-        console.log($modal)
+        
       
       
       //Finally, I will append $modalBoxContainer inside body tag
@@ -103,8 +104,6 @@
     }); 
 //==========================================================================================================================================
       
-
-
 /* 
   With information provided from The Random User Generator API https://randomuser.me/, 
   I  send a request to the API, and use the response data to display 12 users, 
@@ -116,14 +115,70 @@ Email
 City or location
   */
 
+  //this works, but all of gallery cards have the same pictures
  $.ajax({
-    url: 'https://randomuser.me/api/?results=12',//'https://randomuser.me/api/?nat=us'
+    url: 'https://randomuser.me/api/?nat=us&results=12&',
     dataType: 'json',
     success: function(data) {
-      console.log(data.results); //this should log the data for 12 employees inJSON format
+      console.log(data); //this should log the data for 12 employees in JSON format
 
+      var employeeInfo = data.results //creating a reference to data.results
 
-    } //closes success function
+      $.each(employeeInfo, function(index, employee) {
+        //create variable references for Name, email, city,state, etc
+        var name = employee.name.first + " " + employee.name.last;
+        var email = employee.email;
+        var picture = employee.picture.large;
+        var location = employee.location.city;
+        var number = employee.phone;
+        var fullStreet = employee.location.street + " " + location + " " + employee.location.postcode;
+        var birthday =  employee.dob.date;
+
+        //SHOW CONTENT FOR SMALL GALLERY CARDS
+        
+        //attach images to employee gallery 
+        $('.card-img').attr('src', picture);
+
+        //Get to display the name, I used a code snippet from https://stackoverflow.com/a/11468183/10043628 by user jagm
+        $('.card-info-container > :first-child').text(name);
+
+        //Get to display email
+        $('.card-text').text(email);
+
+        //Get to display city and state 
+        $('.card-info-container > :nth-child(3)').text(location);
+
+        
+        
+        //SHOW CONTENT FOR MODAL BOXES
+
+        //display name
+        $('.modal > :nth-child(2)').text(name);
+
+        //attach images to employee modals
+        $('.modal-img').attr('src', picture);
+
+        //Display email
+       $('.modal > :nth-child(3)').text(email);
+
+       //Display city
+        $('.modal > :nth-child(4)').text(location);
+
+        //Display number
+        $('.modal > :nth-child(6)').text(number);
+
+        //Display address
+        $('.modal > :nth-child(7)').text(fullStreet);
+
+        //Display Birthday
+        $('.modal > :nth-child(8)').text(birthday);
+
+        
+        
+      });
+       
+
+} //closes success function
     
   }); //closes ajax request
 
