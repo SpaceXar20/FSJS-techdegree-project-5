@@ -112,8 +112,12 @@ I received some help on this section from https://stackoverflow.com/a/53909635/1
        
        I used a code snippet from https://www.pair.com/support/kb/how-to-use-jquery-to-generate-modal-pop-up-when-clicked/
        */
+      $(document).ready(function () { //this makes sure the function will run only after the elements are fully loaded
+
        $('.card').on("click", function() {
-        $(".modal, .modal-container").addClass("active");
+        $(this).addClass("active");
+        //$(".modal, .modal-container").addClass("active");
+         $(".modal, .modal-container").addClass("active");
         console.log('the modal should pop up after clicking the div card')
     });
 
@@ -121,10 +125,12 @@ I received some help on this section from https://stackoverflow.com/a/53909635/1
     when clicking on: the "X" button, the opened modal or clicking outside the modal,
     so the user has 3 ways to close a modal, this improves UX
     */
+    
     $('#modal-close-btn, .modal, .modal-container').on("click", function()  {
     $(".modal, .modal-container").removeClass("active");
       console.log('you clicked on the x button');
  }); 
+})
          
           
         
