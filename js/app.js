@@ -73,8 +73,11 @@ I received some help on this section from https://stackoverflow.com/a/53909635/1
       
 
       var employeeInfo = data.results //creating a reference to data.results
+
       var _cardTemplate = ''; //make variable reference for gallery
+
       var  modalBoxContainer = ''; //make variable for modal containers
+
       $.each(employeeInfo, function (index, employee) {
           //create variable references for Name, email, city,state, etc
           var name = employee.name.first + " " + employee.name.last;
@@ -86,7 +89,7 @@ I received some help on this section from https://stackoverflow.com/a/53909635/1
           var birthday = employee.dob.date;
 
           //CREATE GALLERY CARDS AND SHOW CONTENT FOR SMALL GALLERY CARDS
-        /*In order to keep a correlation between modal boxes and gallery cars, I use 
+        /*In order to keep a correlation between modal boxes and gallery cards, I use 
         data() to add a index data property for each card template div as well as the modal div
         that way when I click on small gallery card I get the matching modal*/
 
@@ -111,10 +114,7 @@ I received some help on this section from https://stackoverflow.com/a/53909635/1
          
           });
 
-      $('#gallery').append(_cardTemplate); //Append Finally all cards with employee details
-         //Finally, I will append modalBoxContainer inside body tag
-        $('body').append(modalBoxContainer);
-
+     
         /*appends an "active" class to .modal(pop-up-window) and .modal-container(overlay) when .card is clicked
        
        I used a code snippet from https://www.pair.com/support/kb/how-to-use-jquery-to-generate-modal-pop-up-when-clicked/
@@ -123,7 +123,7 @@ I received some help on this section from https://stackoverflow.com/a/53909635/1
 
         $('.card').on("click", function() {
           var theIndex = $(this).data("index"); //this references the data stored in the card
-
+          console.log('clicking the gallery card should display the modal' + data)
           $(".modal", $(".modal-container")).each(function(index){ //if the data between the gallery card and the modal match, then add active class, if not remove it
               if( $(this).data("index") === theIndex) $(this).addClass("active");
               else $(this).removeClass("active");
