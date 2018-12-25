@@ -86,9 +86,11 @@ I received some help on this section from https://stackoverflow.com/a/53909635/1
           var birthday = employee.dob.date;
 
           //CREATE GALLERY CARDS AND SHOW CONTENT FOR SMALL GALLERY CARDS
+        /*In order to keep a correlation between modal boxes and gallery cars, I use 
+        data() to add a index data property for each card template div as well as the modal div
+        that way when I click on small gallery card I get the matching modal*/
 
-
-          _cardTemplate += '<div class="card">';
+          _cardTemplate += '<div class="card" data-index="'+index+'">'; 
           _cardTemplate += '<div class="card-img-container">';
           _cardTemplate += '<img class="card-img" src= "' + picture + '" alt="profile picture"></div>';
           _cardTemplate += '<div class="card-info-container"><h3 id="name" class="card-name cap">' + name + '</h3>';
@@ -100,12 +102,12 @@ I received some help on this section from https://stackoverflow.com/a/53909635/1
         //CREATE MODAL CARDS AND SHOW CONTENT FOR THEM
         
         modalBoxContainer += '<div class="modal-container">';
-        modalBoxContainer += '<div class="modal">';
+        modalBoxContainer += '<div class="modal" data-index="'+index+'">';
         modalBoxContainer += '<button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>';
         modalBoxContainer += '<div class="modal-info-container"><img class="modal-img" src= "' + picture + '" alt="profile picture"><h3 id="name" class="modal-name cap">' + name + '</h3><p class="modal-text">' + email + '</p><p class="modal-text cap">' + location + '</p>';
         modalBoxContainer += '<hr>';
-        modalBoxContainer += '<p class="modal-text">' + number + '</p><p class="modal-text">' + fullStreet + '</p><p class="modal-text">' + birthday + '</p></div>';
-        modalBoxContainer += '<div2>';
+        modalBoxContainer += '<p class="modal-text">' + number + '</p><p class="modal-text">' + fullStreet + '</p><p class="modal-text">' + birthday + '</p>';
+        modalBoxContainer += '</div></div>';
          
           });
 
@@ -120,28 +122,28 @@ I received some help on this section from https://stackoverflow.com/a/53909635/1
       $(document).ready(function () { //this makes sure the function will run only after the elements are fully loaded
 
         $('.card').on("click", function() {
-          $(this).addClass('active')
-         $(".modal, .modal-container").addClass("active");
-         console.log('the modal should pop up after clicking the div card')
-     });
- 
-     /*This removes the "active" class to .modal(pop-up-window)  and .modal-container 
-     when clicking on: the "X" button, the opened modal or clicking outside the modal,
-     so the user has 3 ways to close a modal, this improves UX
-     */
-     
-     $('#modal-close-btn, .modal, .modal-container').on("click", function()  {
-     $(".modal, .modal-container").removeClass("active");
-       console.log('you clicked on the x button');
-  }); 
- })
-          
+          var theIndex = $(this).data("index"); //this references the data stored in the card
 
+          $(".modal", $(".modal-container")).each(function(index){ //if the data between the gallery card and the modal match, then add active class, if not remove it
+              if( $(this).data("index") === theIndex) $(this).addClass("active");
+              else $(this).removeClass("active");
+          });
+      });
+
+      $('#modal-close-btn, .modal, .modal-container').on("click", function() {//clicking on the X button,modal or outside will remove the active class
+          $(".modal", $(".modal-container")).removeClass("active");
+          console.log('you clicked on the x button');
+      });
+   })
+
+
+
+   $('#gallery').append(_cardTemplate); //Append Finally all cards with employee details
+   //Finally, I will append modalBoxContainer inside body tag
+   $('body').append(modalBoxContainer);
   }
 
 })
-
-
         
 
       
