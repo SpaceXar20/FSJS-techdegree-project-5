@@ -107,6 +107,11 @@ I received some help on this section from https://stackoverflow.com/a/53909635/1
         modalBoxContainer += '<p class="modal-text">' + number + '</p><p class="modal-text">' + fullStreet + '</p><p class="modal-text">' + birthday + '</p></div>';
         modalBoxContainer += '<div2>';
          
+          });
+
+      $('#gallery').append(_cardTemplate); //Append Finally all cards with employee details
+         //Finally, I will append modalBoxContainer inside body tag
+        $('body').append(modalBoxContainer);
 
         /*appends an "active" class to .modal(pop-up-window) and .modal-container(overlay) when .card is clicked
        
@@ -114,39 +119,29 @@ I received some help on this section from https://stackoverflow.com/a/53909635/1
        */
       $(document).ready(function () { //this makes sure the function will run only after the elements are fully loaded
 
-       $('.card').on("click", function() {
-        $(this).addClass("active");
-        //$(".modal, .modal-container").addClass("active");
+        $('.card').on("click", function() {
+          $(this).addClass('active')
          $(".modal, .modal-container").addClass("active");
-        console.log('the modal should pop up after clicking the div card')
-    });
-
-    /*This removes the "active" class to .modal(pop-up-window)  and .modal-container 
-    when clicking on: the "X" button, the opened modal or clicking outside the modal,
-    so the user has 3 ways to close a modal, this improves UX
-    */
-    
-    $('#modal-close-btn, .modal, .modal-container').on("click", function()  {
-    $(".modal, .modal-container").removeClass("active");
-      console.log('you clicked on the x button');
- }); 
-})
-         
+         console.log('the modal should pop up after clicking the div card')
+     });
+ 
+     /*This removes the "active" class to .modal(pop-up-window)  and .modal-container 
+     when clicking on: the "X" button, the opened modal or clicking outside the modal,
+     so the user has 3 ways to close a modal, this improves UX
+     */
+     
+     $('#modal-close-btn, .modal, .modal-container').on("click", function()  {
+     $(".modal, .modal-container").removeClass("active");
+       console.log('you clicked on the x button');
+  }); 
+ })
           
-        
-        
 
-
-
-      });
-
-      $('#gallery').append(_cardTemplate); //Append Finally all cards with employee details
-         //Finally, I will append modalBoxContainer inside body tag
-        $('body').append(modalBoxContainer);
   }
 
 })
 
 
+        
 
       
